@@ -1,0 +1,10 @@
+auto lo
+iface lo inet loopback
+
+<% interfaces.each do |iface| %>
+auto <%= iface['name'] %>
+iface  <%= iface['name'] %> inet static
+address <%= iface['ip'] %>
+netmask <%= iface['netmask'] %>
+
+<% end %>

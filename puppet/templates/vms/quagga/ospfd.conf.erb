@@ -1,0 +1,18 @@
+password routeflow
+enable password routeflow
+!
+router ospf
+<% areas.each do |area| %>
+   <% area['networks'].each do |network| %>
+       network <% network -%> area <% area['id'] %>
+   <% end %>
+<% end %>
+!
+log file /var/log/quagga/ospfd.log
+!
+<% interfaces.each do |interface| %>
+interface <% interface %>
+	ip ospf hello-interval 1
+	ip ospf dead-interval 4
+!
+<% end %>
